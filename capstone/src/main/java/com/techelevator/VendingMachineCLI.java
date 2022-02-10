@@ -3,7 +3,7 @@ package com.techelevator;
 import com.techelevator.view.Menu;
 
 public class VendingMachineCLI {
-
+    // Vending Machine constants
     private static final String MAIN_MENU = "Main Menu";
 
     private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
@@ -20,9 +20,9 @@ public class VendingMachineCLI {
 
     private static final String DISPENSE_PRODUCT = "Dispense";
 
-
+    // Create instances of objects used by Vending Machine
     private Menu menu;
-
+    public Inventory inventory = new Inventory();
     public VendingMachineCLI(Menu menu) {
         this.menu = menu;
     }
@@ -51,7 +51,6 @@ public class VendingMachineCLI {
         cli.run();
     }
 
-
     public String vendingMachineProcesses(String process) {
         switch (process) {
             case MAIN_MENU:
@@ -59,6 +58,7 @@ public class VendingMachineCLI {
                 return (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
             case MAIN_MENU_OPTION_DISPLAY_ITEMS:
                 System.out.println("Do the Display Items thing...");
+                inventory.printInventory();
                 return MAIN_MENU;
             case MAIN_MENU_OPTION_PURCHASE:
                 System.out.println("Do the Purchase thing...");
