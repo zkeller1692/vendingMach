@@ -62,7 +62,7 @@ public class VendingMachineCLI {
                 return MAIN_MENU;
             case MAIN_MENU_OPTION_PURCHASE:
                 System.out.println("Do the Purchase thing...");
-                return MAIN_MENU;
+                return (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
             case MAIN_MENU_OPTION_EXIT:
                 System.out.println("Do the Exit thing...");
                 System.exit(0);
