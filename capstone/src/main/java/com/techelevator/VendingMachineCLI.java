@@ -1,6 +1,10 @@
 package com.techelevator;
 
+import com.techelevator.currency.Cash;
 import com.techelevator.view.Menu;
+import jdk.jshell.spi.ExecutionControl;
+
+import java.math.BigDecimal;
 
 public class VendingMachineCLI {
     // Vending Machine constants
@@ -28,6 +32,7 @@ public class VendingMachineCLI {
     public VendingMachineCLI(Menu menu) {
         this.menu = menu;
     }
+    Transaction transaction;
 
     public void run() {
 
@@ -63,21 +68,27 @@ public class VendingMachineCLI {
                 inventory.printInventory();
                 return MAIN_MENU;
             case MAIN_MENU_OPTION_PURCHASE:
+                transaction = new Transaction();
                 System.out.println("Do the Purchase thing...");
                 return (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
             case MAIN_MENU_OPTION_EXIT:
                 System.out.println("Do the Exit thing...");
                 System.exit(0);
             case PURCHASE_MENU_OPTIONS_FEED_MONEY:
+                //TODO -- fix this
+                String moneyToFeed = (String) menu.getChoiceFromOptions(Cash.getValidCash());
+                System.out.println(moneyToFeed);
+                BigDecimal x = new BigDecimal(moneyToFeed);
+                transaction.feedMoney(x);
                 System.out.println("Do the Feed money thing...");
-                return MAIN_MENU;
+                return MAIN_MENU_OPTION_PURCHASE;
             case PURCHASE_MENU_OPTIONS_SELECT_PRODUCT:
                 System.out.println("Do the Select Product thing...");
                 inventory.printInventory();
-                return MAIN_MENU;
+                return MAIN_MENU_OPTION_PURCHASE;
             case PURCHASE_MENU_OPTIONS_FINISH_TRANSACTION:
                 System.out.println("Do the Finish Transaction thing...");
-                return MAIN_MENU;
+                return MAIN_MENU_OPTION_PURCHASE;
             case DISPENSE_PRODUCT:
                 System.out.println("Do the Dispense thing...");
                 return MAIN_MENU;
