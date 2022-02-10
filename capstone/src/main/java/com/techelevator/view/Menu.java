@@ -7,14 +7,17 @@ import java.util.Scanner;
 
 public class Menu {
 
+	// Instance Variables
 	private PrintWriter out;
 	private Scanner in;
 
+	// Constructor
 	public Menu(InputStream input, OutputStream output) {
 		this.out = new PrintWriter(output);
 		this.in = new Scanner(input);
 	}
 
+	// Getters for derived attributes & other behavior methods
 	public Object getChoiceFromOptions(Object[] options) {
 		Object choice = null;
 		while (choice == null) {

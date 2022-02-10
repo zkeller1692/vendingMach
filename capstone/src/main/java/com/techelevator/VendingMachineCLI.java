@@ -28,7 +28,13 @@ public class VendingMachineCLI {
     }
 
     public void run() {
+
+        String nextProcess = MAIN_MENU;
+
         while (true) {
+
+            nextProcess = vendingMachineProcesses(nextProcess);
+
 //			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 //
 //			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
@@ -36,7 +42,6 @@ public class VendingMachineCLI {
 //			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 //				// do purchase
 //			}
-
         }
     }
 
@@ -47,32 +52,34 @@ public class VendingMachineCLI {
     }
 
 
-    public void vendingMachineProcesses(String process) {
+    public String vendingMachineProcesses(String process) {
         switch (process) {
             case MAIN_MENU:
                 System.out.println("Do the Main Menu thing...");
-                break;
+                return (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
             case MAIN_MENU_OPTION_DISPLAY_ITEMS:
                 System.out.println("Do the Display Items thing...");
-                break;
+                return MAIN_MENU;
             case MAIN_MENU_OPTION_PURCHASE:
                 System.out.println("Do the Purchase thing...");
-                break;
+                return MAIN_MENU;
             case MAIN_MENU_OPTION_EXIT:
                 System.out.println("Do the Exit thing...");
-                break;
+                System.exit(0);
             case PURCHASE_MENU_OPTIONS_FEED_MONEY:
                 System.out.println("Do the Feed money thing...");
-                break;
+                return MAIN_MENU;
             case PURCHASE_MENU_OPTIONS_SELECT_PRODUCT:
                 System.out.println("Do the Select Product thing...");
-                break;
+                return MAIN_MENU;
             case PURCHASE_MENU_OPTIONS_FINISH_TRANSACTION:
                 System.out.println("Do the Finish Transaction thing...");
-                break;
+                return MAIN_MENU;
             case DISPENSE_PRODUCT:
                 System.out.println("Do the Dispense thing...");
-                break;
+                return MAIN_MENU;
+            default:
+                return null;
+            }
         }
-    }
 }
