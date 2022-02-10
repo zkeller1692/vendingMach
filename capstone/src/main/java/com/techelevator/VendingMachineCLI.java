@@ -73,6 +73,7 @@ public class VendingMachineCLI {
                 return MAIN_MENU;
             case PURCHASE_MENU_OPTIONS_SELECT_PRODUCT:
                 System.out.println("Do the Select Product thing...");
+                inventory.printInventory();
                 return MAIN_MENU;
             case PURCHASE_MENU_OPTIONS_FINISH_TRANSACTION:
                 System.out.println("Do the Finish Transaction thing...");

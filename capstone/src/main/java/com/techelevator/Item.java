@@ -10,6 +10,7 @@ public class Item {
     private BigDecimal itemPrice;
     private String itemType;
     private int itemStock;
+    private boolean inStock;
 
     // Constructor
 
@@ -19,6 +20,8 @@ public class Item {
         this.itemPrice = new BigDecimal(itemPriceStr);
         this.itemType = itemType;
         this.itemStock = itemStock;
+
+        this.inStock = true;
     }
 
     // Getters

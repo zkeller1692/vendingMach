@@ -2,6 +2,8 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Inventory {
@@ -11,6 +13,7 @@ public class Inventory {
     // Instance variables
     File path = new File ("vendingmachine.csv");
     int maxItemStockPerItem;
+    List<Item> inventoryList = new ArrayList<>();
 
     public Inventory(int maxItemStockPerItem) {
         this.maxItemStockPerItem = maxItemStockPerItem;
@@ -34,13 +37,8 @@ public class Inventory {
     }
 
     public void printInventory() {
-        try(Scanner inputFile = new Scanner(path)) {
-            while (inputFile.hasNextLine()){
-                System.out.println(inputFile.nextLine());
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: Out of order");
-            System.exit(ERROR_READING_INVENTORY);
+        for (Item item : inventoryList) {
+            System.out.println(item);
         }
     }
 
@@ -54,6 +52,7 @@ public class Inventory {
             String itemType = itemDataArray[3];
 
             Item item = new Item(itemCode, itemName, itemPrice, itemType, maxItemStockPerItem);
+            inventoryList.add(item);
 
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Unable to load this item into inventory.");
