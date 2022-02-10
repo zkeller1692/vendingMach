@@ -20,9 +20,11 @@ public class VendingMachineCLI {
 
     private static final String DISPENSE_PRODUCT = "Dispense";
 
+    private static final int MAX_ITEM_STOCK_PER_ITEM = 5;
+
     // Create instances of objects used by Vending Machine
     private Menu menu;
-    public Inventory inventory = new Inventory();
+    public Inventory inventory = new Inventory(MAX_ITEM_STOCK_PER_ITEM);
     public VendingMachineCLI(Menu menu) {
         this.menu = menu;
     }
