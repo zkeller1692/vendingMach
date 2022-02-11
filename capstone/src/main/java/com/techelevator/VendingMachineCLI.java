@@ -7,6 +7,7 @@ import jdk.jshell.spi.ExecutionControl;
 import java.math.BigDecimal;
 
 public class VendingMachineCLI {
+    //TODO -- make these enums and put them in a separate class
     // Vending Machine constants
     private static final String MAIN_MENU = "Main Menu";
 
@@ -25,6 +26,7 @@ public class VendingMachineCLI {
     private static final String DISPENSE_PRODUCT = "Dispense";
 
     private static final int MAX_ITEM_STOCK_PER_ITEM = 5;
+
 
     // Create instances of objects used by Vending Machine
     private Menu menu;
@@ -84,6 +86,8 @@ public class VendingMachineCLI {
             case PURCHASE_MENU_OPTIONS_SELECT_PRODUCT:
                 System.out.println("Do the Select Product thing...");
                 inventory.printInventory();
+                String itemSelected = (String) menu.getChoiceFromOptions(inventory.getItemCodes());
+                System.out.println(inventory.getItem(itemSelected));
                 return MAIN_MENU_OPTION_PURCHASE;
             case PURCHASE_MENU_OPTIONS_FINISH_TRANSACTION:
                 System.out.println("Do the Finish Transaction thing...");

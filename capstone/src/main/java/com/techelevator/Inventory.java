@@ -20,11 +20,25 @@ public class Inventory {
     }
 
     // Getters
+    //TODO -- make sure this works with menu
     public String[] getItemCodes() {
-        return (String[]) inventoryMap.keySet().toArray();
+        String[] itemCodes = inventoryMap.keySet().toArray(new String[0]);
+        Arrays.sort(itemCodes);
+        return itemCodes;
     }
+
     public Item[] getItems() {
-        return (Item[]) inventoryMap.values().toArray();
+        Item[] items = new Item[getItemCodes().length];
+        int i = 0;
+        for (String itemCode : getItemCodes()) {
+            items[i] = inventoryMap.get(itemCode);
+            i++;
+        }
+        return items;
+    }
+
+    public Item getItem(String itemCode) {
+        return inventoryMap.get(itemCode);
     }
 
     public void loadInventory() {
