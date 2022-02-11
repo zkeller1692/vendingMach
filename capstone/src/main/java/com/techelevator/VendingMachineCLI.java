@@ -29,10 +29,12 @@ public class VendingMachineCLI {
     // Create instances of objects used by Vending Machine
     private Menu menu;
     public Inventory inventory = new Inventory(MAX_ITEM_STOCK_PER_ITEM);
+    Transaction transaction = new Transaction();
+
+    // Constructor
     public VendingMachineCLI(Menu menu) {
         this.menu = menu;
     }
-    Transaction transaction;
 
     public void run() {
 
@@ -68,18 +70,15 @@ public class VendingMachineCLI {
                 inventory.printInventory();
                 return MAIN_MENU;
             case MAIN_MENU_OPTION_PURCHASE:
-                transaction = new Transaction();
                 System.out.println("Do the Purchase thing...");
                 return (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
             case MAIN_MENU_OPTION_EXIT:
                 System.out.println("Do the Exit thing...");
                 System.exit(0);
             case PURCHASE_MENU_OPTIONS_FEED_MONEY:
-                //TODO -- fix this
                 String moneyToFeed = (String) menu.getChoiceFromOptions(Cash.getValidCash());
-                System.out.println(moneyToFeed);
-                BigDecimal x = new BigDecimal(moneyToFeed);
-                transaction.feedMoney(x);
+                transaction.feedMoney(moneyToFeed);
+                System.out.format("You have deposited $%s money in the machine%n", transaction.getBalance());
                 System.out.println("Do the Feed money thing...");
                 return MAIN_MENU_OPTION_PURCHASE;
             case PURCHASE_MENU_OPTIONS_SELECT_PRODUCT:
@@ -88,7 +87,10 @@ public class VendingMachineCLI {
                 return MAIN_MENU_OPTION_PURCHASE;
             case PURCHASE_MENU_OPTIONS_FINISH_TRANSACTION:
                 System.out.println("Do the Finish Transaction thing...");
-                return MAIN_MENU_OPTION_PURCHASE;
+                //TODO -- make sure that new Transactions are being created at appropriate times
+                // Getting the machine ready for a new transaction is done right after old transaction is done
+                transaction = new Transaction();
+                return MAIN_MENU;
             case DISPENSE_PRODUCT:
                 System.out.println("Do the Dispense thing...");
                 return MAIN_MENU;
