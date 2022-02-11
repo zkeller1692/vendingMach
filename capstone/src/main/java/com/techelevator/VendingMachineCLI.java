@@ -86,8 +86,11 @@ public class VendingMachineCLI {
             case PURCHASE_MENU_OPTIONS_SELECT_PRODUCT:
                 System.out.println("Do the Select Product thing...");
                 inventory.printInventory();
-                String itemSelected = (String) menu.getChoiceFromOptions(inventory.getItemCodes());
-                System.out.println(inventory.getItem(itemSelected));
+                String itemCodeSelected = (String) menu.getChoiceFromOptions(inventory.getItemCodes());
+                Item itemSelected = inventory.getItem(itemCodeSelected);
+                transaction.addItem(itemSelected);
+                System.out.println(itemSelected);
+                System.out.println(transaction.getItemsToBuy());
                 return MAIN_MENU_OPTION_PURCHASE;
             case PURCHASE_MENU_OPTIONS_FINISH_TRANSACTION:
                 System.out.println("Do the Finish Transaction thing...");
