@@ -5,6 +5,7 @@ import com.techelevator.view.Menu;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.math.BigDecimal;
+import java.util.Scanner;
 
 public class VendingMachineCLI {
     //TODO -- make these enums and put them in a separate class
@@ -45,14 +46,6 @@ public class VendingMachineCLI {
         while (true) {
 
             nextProcess = vendingMachineProcesses(nextProcess);
-
-//			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
-//
-//			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-//				// display vending machine items
-//			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-//				// do purchase
-//			}
         }
     }
 
@@ -86,8 +79,12 @@ public class VendingMachineCLI {
             case PURCHASE_MENU_OPTIONS_SELECT_PRODUCT:
                 System.out.println("Do the Select Product thing...");
                 inventory.printInventory();
-                String itemCodeSelected = (String) menu.getChoiceFromOptions(inventory.getItemCodes());
-                Item itemSelected = inventory.getItem(itemCodeSelected);
+                // TODO -- Move Scanner create class to extend menu
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Select Code: ");
+                String itemCodeSelected = scanner.nextLine();
+                //String itemCodeSelected = (String) menu.getChoiceFromOptions(inventory.getItemCodes());
+                Item itemSelected = inventory.getItem(itemCodeSelected.toUpperCase());
                 transaction.addItem(itemSelected);
                 System.out.println(itemSelected);
                 System.out.println(transaction.getItemsToBuy());
