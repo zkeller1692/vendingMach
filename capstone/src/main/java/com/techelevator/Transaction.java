@@ -28,8 +28,13 @@ public class Transaction {
     }
 
     public void addItem(Item itemToBuy){
-        // TODO -- Fix compare BigDecimal
-        if (balance > 0 && balance >= itemToBuy.getItemPrice())
-        itemsToBuy.add(itemToBuy);
+        //TODO -- High priority for testing
+        BigDecimal itemPrice = itemToBuy.getItemPrice();
+        if (balance.compareTo(BigDecimal.ZERO) > 0 && !(itemPrice.compareTo(balance) > 0)) {
+            itemsToBuy.add(itemToBuy);
+            balance = balance.subtract(itemPrice);
+        } else {
+            System.out.println("Insufficient funds. Please add money.");
+        }
     }
 }
