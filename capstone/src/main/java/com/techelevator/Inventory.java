@@ -2,22 +2,29 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Inventory {
     // Class variables
     public static final int ERROR_READING_INVENTORY = 1;
 
     // Instance variables
-    File path = new File ("vendingmachine.csv");
-    int maxItemStockPerItem;
-    List<Item> inventoryList = new ArrayList<>();
+    private File path = new File ("vendingmachine.csv");
+    private int maxItemStockPerItem;
+    private Map<String, Item> inventoryMap = new HashMap<>();
 
+    // Constructor
     public Inventory(int maxItemStockPerItem) {
         this.maxItemStockPerItem = maxItemStockPerItem;
         loadInventory();
+    }
+
+    // Getters
+    public String[] getItemCodes() {
+        return (String[]) inventoryMap.keySet().toArray();
+    }
+    public Item[] getItems() {
+        return (Item[]) inventoryMap.values().toArray();
     }
 
     public void loadInventory() {
@@ -37,7 +44,7 @@ public class Inventory {
     }
 
     public void printInventory() {
-        for (Item item : inventoryList) {
+        for (Item item : getItems()) {
             System.out.println(item);
         }
     }
@@ -52,7 +59,7 @@ public class Inventory {
             String itemType = itemDataArray[3];
 
             Item item = new Item(itemCode, itemName, itemPrice, itemType, maxItemStockPerItem);
-            inventoryList.add(item);
+            inventoryMap.put(itemCode, item);
 
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Unable to load this item into inventory.");
