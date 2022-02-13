@@ -4,18 +4,41 @@ import java.math.BigDecimal;
 
 public enum Coins {
 
-    NICKEL(new BigDecimal("0.05")),
-    DIME(new BigDecimal("0.10")),
-    QUARTER(new BigDecimal("0.25"));
+    NICKLE("0.05", "nickles"),
+    DIME("0.10", "dimes"),
+    QUARTER("0.25", "quarters");
 
-    public final BigDecimal value;
+    public final String value;
+    public final String name;
 
-    private Coins(BigDecimal value) {
+    public static final Coins[] VALID_COINS = {QUARTER, DIME, NICKLE};
+
+    private Coins(String value, String name) {
         this.value = value;
+        this.name = name;
     }
 
+    public static String[] getValidCoins() {
+        String[] coinStr = new String[Coins.values().length];
+        int i = 0;
+        for (Coins coin : Coins.values()) {
+            coinStr[i] = coin.toString();
+            i++;
+        }
+        return coinStr;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    // Built-ins Override
     @Override
     public String toString() {
-        return value.toString();
+        return getValue();
     }
 }

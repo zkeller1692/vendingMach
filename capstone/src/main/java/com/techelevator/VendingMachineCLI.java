@@ -77,13 +77,13 @@ public class VendingMachineCLI {
             case PURCHASE_MENU_OPTIONS_SELECT_PRODUCT:
                 System.out.println("Do the Select Product thing...");
                 inventory.printInventory();
-                // TODO -- Move Scanner create class to extend menu
                 String itemCodeSelected = (String) menu.getChoiceFromOptions(inventory.getItemCodes());
                 Item itemSelected = inventory.getItem(itemCodeSelected);
                 transaction.buyItem(itemSelected);
                 return MAIN_MENU_OPTION_PURCHASE;
             case PURCHASE_MENU_OPTIONS_FINISH_TRANSACTION:
                 System.out.println("Do the Finish Transaction thing...");
+                transaction.returnChange();
                 // TODO -- make sure that new Transactions are being created at appropriate times
                 //  Getting the machine ready for a new transaction is done right after old transaction is done
                 transaction = new Transaction();
