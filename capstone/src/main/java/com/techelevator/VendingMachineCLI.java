@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import com.techelevator.currency.Cash;
+import com.techelevator.view.Keypad;
 import com.techelevator.view.Menu;
 import jdk.jshell.spi.ExecutionControl;
 
@@ -31,12 +32,14 @@ public class VendingMachineCLI {
 
     // Create instances of objects used by Vending Machine
     private Menu menu;
+    private Keypad keypad;
     public Inventory inventory = new Inventory(MAX_ITEM_STOCK_PER_ITEM);
     Transaction transaction = new Transaction();
 
     // Constructor
-    public VendingMachineCLI(Menu menu) {
+    public VendingMachineCLI(Menu menu, Keypad keypad) {
         this.menu = menu;
+        this.keypad = keypad;
     }
 
     public void run() {
@@ -51,7 +54,8 @@ public class VendingMachineCLI {
 
     public static void main(String[] args) {
         Menu menu = new Menu(System.in, System.out);
-        VendingMachineCLI cli = new VendingMachineCLI(menu);
+        Keypad keypad = new Keypad(System.in, System.out);
+        VendingMachineCLI cli = new VendingMachineCLI(menu, keypad);
         cli.run();
     }
 
@@ -80,11 +84,11 @@ public class VendingMachineCLI {
                 System.out.println("Do the Select Product thing...");
                 inventory.printInventory();
                 // TODO -- Move Scanner create class to extend menu
-                Scanner scanner = new Scanner(System.in);
-                System.out.println("Select Code: ");
-                String itemCodeSelected = scanner.nextLine();
-                //String itemCodeSelected = (String) menu.getChoiceFromOptions(inventory.getItemCodes());
-                Item itemSelected = inventory.getItem(itemCodeSelected.toUpperCase());
+                //Scanner scanner = new Scanner(System.in);
+                //System.out.println("Select Code: ");
+                //String itemCodeSelected = scanner.nextLine();
+                String itemCodeSelected = (String) keypad.getChoiceFromOptions(inventory.getItems());
+                Item itemSelected = inventory.getItem(itemCodeSelected);
                 transaction.addItem(itemSelected);
                 System.out.println(itemSelected);
                 System.out.println(transaction.getItemsToBuy());
