@@ -56,37 +56,30 @@ public class VendingMachineCLI {
     public String vendingMachineProcesses(String process) {
         switch (process) {
             case MAIN_MENU:
-                System.out.println("Do the Main Menu thing...");
                 return (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
             case MAIN_MENU_OPTION_DISPLAY_ITEMS:
-                System.out.println("Do the Display Items thing...");
                 inventory.printInventory();
                 return MAIN_MENU;
             case MAIN_MENU_OPTION_PURCHASE:
-                System.out.println("Do the Purchase thing...");
                 System.out.format("Current money provided: $%s %n", transaction.getBalance());
                 return (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
             case MAIN_MENU_OPTION_EXIT:
-                System.out.println("Do the Exit thing...");
                 System.exit(0);
             case PURCHASE_MENU_OPTIONS_FEED_MONEY:
                 String moneyToFeed = (String) menu.getChoiceFromOptions(Cash.getValidCash());
                 transaction.feedMoney(moneyToFeed);
-                System.out.println("Do the Feed money thing...");
                 return MAIN_MENU_OPTION_PURCHASE;
             case PURCHASE_MENU_OPTIONS_SELECT_PRODUCT:
-                System.out.println("Do the Select Product thing...");
                 inventory.printInventory();
                 String itemCodeSelected = (String) menu.getChoiceFromOptions(inventory.getItemCodes());
                 Item itemSelected = inventory.getItem(itemCodeSelected);
                 transaction.buyItem(itemSelected);
                 return MAIN_MENU_OPTION_PURCHASE;
             case PURCHASE_MENU_OPTIONS_FINISH_TRANSACTION:
-                System.out.println("Do the Finish Transaction thing...");
                 transaction.returnChange();
-                // TODO -- make sure that new Transactions are being created at appropriate times
                 //  Getting the machine ready for a new transaction is done right after old transaction is done
                 transaction = new Transaction();
+                // TODO -- make sure that new Transactions are being created at appropriate times
                 return MAIN_MENU;
             default:
                 return null;
