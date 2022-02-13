@@ -10,8 +10,9 @@ import java.util.Scanner;
 
 public class Keypad extends Menu{
 
-    private PrintWriter out;
-    private Scanner in;
+	// Instance Variables
+	private PrintWriter out;
+	private Scanner in;
 
     public Keypad(InputStream input, OutputStream output){
         super(input, output);

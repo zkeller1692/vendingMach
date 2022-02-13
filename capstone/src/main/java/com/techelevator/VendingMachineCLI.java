@@ -3,10 +3,6 @@ package com.techelevator;
 import com.techelevator.currency.Cash;
 import com.techelevator.view.Keypad;
 import com.techelevator.view.Menu;
-import jdk.jshell.spi.ExecutionControl;
-
-import java.math.BigDecimal;
-import java.util.Scanner;
 
 public class VendingMachineCLI {
     //TODO -- make these enums and put them in a separate class
@@ -24,8 +20,6 @@ public class VendingMachineCLI {
     private static final String PURCHASE_MENU_OPTIONS_FINISH_TRANSACTION = "Finish Transaction";
     private static final String[] PURCHASE_MENU_OPTIONS = {PURCHASE_MENU_OPTIONS_FEED_MONEY,
             PURCHASE_MENU_OPTIONS_SELECT_PRODUCT, PURCHASE_MENU_OPTIONS_FINISH_TRANSACTION};
-
-    private static final String DISPENSE_PRODUCT = "Dispense";
 
     private static final int MAX_ITEM_STOCK_PER_ITEM = 5;
 
@@ -84,23 +78,15 @@ public class VendingMachineCLI {
                 System.out.println("Do the Select Product thing...");
                 inventory.printInventory();
                 // TODO -- Move Scanner create class to extend menu
-                //Scanner scanner = new Scanner(System.in);
-                //System.out.println("Select Code: ");
-                //String itemCodeSelected = scanner.nextLine();
-                String itemCodeSelected = (String) keypad.getChoiceFromOptions(inventory.getItems());
+                String itemCodeSelected = (String) menu.getChoiceFromOptions(inventory.getItemCodes());
                 Item itemSelected = inventory.getItem(itemCodeSelected);
-                transaction.addItem(itemSelected);
-                System.out.println(itemSelected);
-                System.out.println(transaction.getItemsToBuy());
+                transaction.buyItem(itemSelected);
                 return MAIN_MENU_OPTION_PURCHASE;
             case PURCHASE_MENU_OPTIONS_FINISH_TRANSACTION:
                 System.out.println("Do the Finish Transaction thing...");
                 // TODO -- make sure that new Transactions are being created at appropriate times
                 //  Getting the machine ready for a new transaction is done right after old transaction is done
                 transaction = new Transaction();
-                return MAIN_MENU;
-            case DISPENSE_PRODUCT:
-                System.out.println("Do the Dispense thing...");
                 return MAIN_MENU;
             default:
                 return null;

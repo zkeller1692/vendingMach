@@ -46,6 +46,30 @@ public class Item {
         return itemStock;
     }
 
+    // Behavior methods
+    public void removeItemFromStock() {
+        if (itemStock > 0) {
+            itemStock -= 1;
+        }
+    }
+
+    public void printPurchaseMessage() {
+        switch (itemType) {
+            case "Chip":
+                System.out.println("Crunch Crunch, Yum!");
+                break;
+            case "Candy":
+                System.out.println("Munch Munch, Yum!");
+                break;
+            case "Drink":
+                System.out.println("Glug Glug, Yum!");
+                break;
+            case "Gum":
+                System.out.println("Chew Chew, Yum!");
+                break;
+        }
+    }
+
     // To String
     @Override
     public String toString() {
